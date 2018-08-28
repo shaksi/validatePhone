@@ -10,7 +10,7 @@ $("#verifyPhone").validator().on("submit", function (event) {
         var copyText = document.getElementById("mobile");
         copyText.select();
         document.execCommand("copy");
-        alert("Copied the text: " + copyText.value);
+        console.log("Copied the text: " + copyText.value);
         event.preventDefault();
         submitForm();
     }
