@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Floating labels example for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./assets/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./assets/floating-labels.css" rel="stylesheet">
+
+  <body>
+    <form class="form-signin shake" id="verifyPhone"  data-toggle="validator" >
+      <div class="text-center mb-4">
+        <img class="mb-4" src="./assets/logo.png" alt=""  height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Mobile verification</h1>
+        <p>Enter UK mobile number below, customer will be sent verification code by the system. </p>
+          <input type="hidden" id="code" name="code" value="NSHSKA">
+
+      </div>
+
+      <div class="form-label-group">
+        <input type="text" id="mobile" class="form-control" placeholder="customer mobile (UK only)"  autofocus="1"  minlength="10" required>
+        <label for="mobile">customer number (UK)</label>
+        <div class="clearfix"></div>
+        <p id="msgSubmit" class="h3 text-center hidden"></p>
+        <div class="clearfix"></div>
+      </div>
+
+      <p>&nbsp;</p>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Send verification code</button>
+
+    </form>
+
+  
+</body> 
+
+<script  type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="js/validator.min.js"></script>
+<script type="text/javascript" src="js/form-scripts.js"></script>
+  </html>
