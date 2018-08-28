@@ -1,10 +1,11 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
 use Twilio\Rest\Client;
-
-$dotenv = new Dotenv\Dotenv(__DIR__);
-$dotenv->load();
-
+$filename = './.env';
+if (file_exists($filename)) {
+    $dotenv = new Dotenv\Dotenv(__DIR__);
+    $dotenv->load();
+}
 $msg = "Your IQOS code is: %s \n
 Please share this with the store staff at IQOS, High Street Kensington to receive your IQOS Starter Kit for £99.00";
 
