@@ -7,10 +7,10 @@ $("#verifyPhone").validator().on("submit", function (event) {
     } else {
         // everything looks good!
         //copy number and submit form
-        var copyText = document.getElementById("mobile");
-        copyText.select();
-        document.execCommand("copy");
-        console.log("Copied the text: " + copyText.value);
+        // var copyText = document.getElementById("mobile");
+        // copyText.select();
+        // document.execCommand("copy");
+        // console.log("Copied the text: " + copyText.value);
         event.preventDefault();
         submitForm();
     }
@@ -20,6 +20,7 @@ $("#verifyPhone").validator().on("submit", function (event) {
 function submitForm(){
     // Initiate Variables With Form Content
     var mobile = $("#mobile").val();
+    Clipboard.copy(mobile);
 
     console.log(mobile);
     $.ajax({
@@ -60,3 +61,49 @@ function submitMSG(valid, msg){
     }
     $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
 }
+
+window.Clipboard = (function(window, document, navigator) {
+    var textArea,
+        copy;
+
+    function isOS() {
+        return navigator.userAgent.match(/ipad|iphone/i);
+    }
+
+    function createTextArea(text) {
+        textArea = document.createElement('textArea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+    }
+
+    function selectText() {
+        var range,
+            selection;
+
+        if (isOS()) {
+            range = document.createRange();
+            range.selectNodeContents(textArea);
+            selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            textArea.setSelectionRange(0, 999999);
+        } else {
+            textArea.select();
+        }
+    }
+
+    function copyToClipboard() {        
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+    }
+
+    copy = function(text) {
+        createTextArea(text);
+        selectText();
+        copyToClipboard();
+    };
+
+    return {
+        copy: copy
+    };
+})(window, document, navigator);
