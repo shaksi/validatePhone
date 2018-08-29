@@ -22,7 +22,7 @@ $client = new Client($account_sid, $auth_token);
 
 $errorMSG = "";
 $data=array();
-$fields = array('mobile','code');
+$fields = array('mobile');
 foreach ($fields as $key => $field) {
     if (@empty($_POST[$field])) {
         $errorMSG.= $field." is required\n";
