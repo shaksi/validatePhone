@@ -19,10 +19,12 @@ $("#verifyPhone").validator().on("submit", function (event) {
 
 function submitForm(){
     // Initiate Variables With Form Content
-    var name = $("#name").val();-
+    var name = $("#name").val();
     var mobile = $("#mobile").val();
-    var privacy = $("#marketing").is(':checked');
+    var privacy = $("#privacy").is(':checked');
     var marketing = $("#marketing").is(':checked');
+    console.log("MARKET",marketing);
+    console.log("PRIVACY",privacy);
     Clipboard.copy(mobile);
 
     console.log(mobile);
