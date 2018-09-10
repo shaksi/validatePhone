@@ -48,7 +48,7 @@ function formSuccess(){
     $("#verifyPhone")[0].reset();
     // $("#mainForm").hide();
     // $(window).scrollTop(0);
-    $(".btn-primary").hide();
+    // $(".btn-primary").hide();
     submitMSG(true, response.data);
 }
 

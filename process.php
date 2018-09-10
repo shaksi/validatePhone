@@ -49,7 +49,7 @@ if ($errorMSG == ""){
             )
         );
 
-        echo json_encode(array("status"=>true, 'data'=> "Text message has been sent mgm code."));
+        echo json_encode(array("status"=>true, 'data'=> "MGM code has been sent to customer."));
 
     } catch (Exception $e) {
         echo json_encode(array("status"=>false, 'data'=> 'Error: '.  $e->getMessage()));
