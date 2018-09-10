@@ -19,14 +19,17 @@ $("#verifyPhone").validator().on("submit", function (event) {
 
 function submitForm(){
     // Initiate Variables With Form Content
+    var name = $("#name").val();-
     var mobile = $("#mobile").val();
+    var privacy = $("#marketing").is(':checked');
+    var marketing = $("#marketing").is(':checked');
     Clipboard.copy(mobile);
 
     console.log(mobile);
     $.ajax({
         type: "POST",
         url: "process.php",
-        data: "mobile=" + mobile,
+        data: "name=" + name + "&&mobile=" + mobile + "&&privacy=" + privacy + "&&marketing=" + marketing,
         success : function(text) {
             console.log(text);
             response = JSON.parse(text);

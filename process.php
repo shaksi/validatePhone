@@ -6,9 +6,12 @@ if (file_exists($filename)) {
     $dotenv = new Dotenv\Dotenv(__DIR__);
     $dotenv->load();
 }
-$msg = "Your IQOS MGM code is: %s \n
-Please share this with the store staff at IQOS, High Street Kensington to receive your IQOS Starter Kit for £99.00";
-$mgm = 'HSJASS'
+$msg = "Hi %s \n
+Your IQOS MGM code is: %s \n
+You can redeem this code to get £20 off the IQOS starter kit on http://iqos.co.uk or in any IQOS store\n
+%s";
+$mgm = 'HSJASS';
+$marketing = 'You have opted in to marketing';
 // Your Account SID and Auth Token from twilio.com/console
 $account_sid = getenv('TWILIO_ACCOUNT_SID'); 
 $auth_token = getenv('TWILIO_AUTH_TOKEN');
@@ -22,7 +25,7 @@ $client = new Client($account_sid, $auth_token);
 
 $errorMSG = "";
 $data=array();
-$fields = array('mobile');
+$fields = array('mobile', 'marketing', 'name');
 foreach ($fields as $key => $field) {
     if (@empty($_POST[$field])) {
         $errorMSG.= $field." is required\n";
@@ -33,15 +36,24 @@ foreach ($fields as $key => $field) {
 
 // redirect to success page
 if ($errorMSG == ""){
+    $marketing = $data['marketing']?$marketing:'';
+    try {
         $client->messages->create(
             // Where to send a text message (your cell phone?)
             $data['mobile'],
             array(
             'from' => $twilio_number,
-            'body' => sprintf($msg, $mgm)
+            'body' => sprintf($msg, $date['name'], $mgm ,$marketing)
             )
         );
+
         echo json_encode(array("status"=>true, 'data'=> "Text message has been sent mgm code."));
+
+    } catch (Exception $e) {
+        echo json_encode(array("status"=>false, 'data'=> 'Error: '.  $e->getMessage()));
+    }
+    
+    
 
 }else {
     if($errorMSG == ""){
