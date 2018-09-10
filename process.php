@@ -6,9 +6,9 @@ if (file_exists($filename)) {
     $dotenv = new Dotenv\Dotenv(__DIR__);
     $dotenv->load();
 }
-$msg = "Your IQOS code is: %s \n
+$msg = "Your IQOS MGM code is: %s \n
 Please share this with the store staff at IQOS, High Street Kensington to receive your IQOS Starter Kit for £99.00";
-
+$mgm = 'HSJASS'
 // Your Account SID and Auth Token from twilio.com/console
 $account_sid = getenv('TWILIO_ACCOUNT_SID'); 
 $auth_token = getenv('TWILIO_AUTH_TOKEN');
@@ -33,16 +33,15 @@ foreach ($fields as $key => $field) {
 
 // redirect to success page
 if ($errorMSG == ""){
-        $code = strtoupper(generateRandomString(5));
         $client->messages->create(
             // Where to send a text message (your cell phone?)
             $data['mobile'],
             array(
             'from' => $twilio_number,
-            'body' => sprintf($msg, $code)
+            'body' => sprintf($msg, $mgm)
             )
         );
-        echo json_encode(array("status"=>true, 'data'=> "Text message has been sent.\n Customer verification code is: ".$code));
+        echo json_encode(array("status"=>true, 'data'=> "Text message has been sent mgm code."));
 
 }else {
     if($errorMSG == ""){
@@ -52,17 +51,6 @@ if ($errorMSG == ""){
         echo json_encode(array("status"=>false, 'data'=> $errorMSG));
 
     } 
-}
-
-
-function generateRandomString($length = 10) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-    return $randomString;
 }
 
 ?>
