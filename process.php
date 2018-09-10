@@ -6,11 +6,12 @@ if (file_exists($filename)) {
     $dotenv = new Dotenv\Dotenv(__DIR__);
     $dotenv->load();
 }
-$msg = "Hi %s \n
-Your IQOS MGM code is: %s \n
-You can redeem this code to get £20 off the IQOS starter kit on http://iqos.co.uk or in any IQOS store\n
-%s";
-$mgm = 'HSJASS';
+$msg = "Hi %s! \n
+Thank you for taking the time to discover IQOS! We would like to send you your IQOS code.\n
+Enter M80V3 to get £20 off when you purchase an IQOS starter kit online or in-store. \n
+Just click here https://uk.iqos.com/refer-a-smoker-friend and enter this code at checkout. \n
+IQOS is not risk-free and is for adult users only. Terms and conditions apply. Discount applies to a device only. PML privacy policy: https://uk.iqos.com/privacy-policy";
+$mgm = 'M80V3';
 $marketing = 'You have opted in to marketing';
 // Your Account SID and Auth Token from twilio.com/console
 $account_sid = getenv('TWILIO_ACCOUNT_SID'); 
@@ -37,13 +38,14 @@ foreach ($fields as $key => $field) {
 // redirect to success page
 if ($errorMSG == ""){
     $marketing = $data['marketing']?$marketing:'';
+    $name = ucwords(strtolower($data['name']));
     try {
         $client->messages->create(
             // Where to send a text message (your cell phone?)
             $data['mobile'],
             array(
             'from' => $twilio_number,
-            'body' => sprintf($msg, $date['name'], $mgm ,$marketing)
+            'body' => sprintf($msg, $name)
             )
         );
 
