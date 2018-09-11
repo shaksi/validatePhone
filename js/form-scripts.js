@@ -23,8 +23,7 @@ function submitForm(){
     var mobile = $("#mobile").val();
     var privacy = $("#privacy").is(':checked');
     var marketing = $("#marketing").is(':checked');
-    console.log("MARKET",marketing);
-    console.log("PRIVACY",privacy);
+
     Clipboard.copy(mobile);
 
     console.log(mobile);
