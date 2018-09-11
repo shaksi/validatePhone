@@ -40,8 +40,6 @@ foreach ($fields as $key => $field) {
 
 // redirect to success page
 if ($errorMSG == ""){
-    $marketing = $data['marketing']?"true":'false';
-    $privacy = $data['privacy']?"true":'false';
     $name = ucwords(strtolower($data['name']));
     try {
         //insert into db
@@ -53,7 +51,7 @@ if ($errorMSG == ""){
             'body' => sprintf($msg, $name)
             )
         );
-       $conn->query(sprintf($sql,$name, $data['mobile'], $marketing, $privacy));
+       $conn->query(sprintf($sql,$name, $data['mobile'], $data['marketing'], $data['privacy']));
 
         echo json_encode(array("status"=>true, 'data'=> "MGM code has been sent to customer."));
 
